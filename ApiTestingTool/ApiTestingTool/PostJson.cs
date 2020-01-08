@@ -23,6 +23,7 @@ namespace ApiTestingTool
 
         public async Task<string> PostTheJson()
         {
+            //Lambda anonymous async
             string ResponseOfTheServer = await Task.Run( () =>
             {
                 try
@@ -54,9 +55,6 @@ namespace ApiTestingTool
             }
             return ResponseOfTheServer;
         }
-        private void ComputeWebRequest()
-        {
-
-        }
+      
     }
 }
