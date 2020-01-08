@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="ApiTestingTool.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ApiTestingTool"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Azure" RequestedTheme="Light">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="1*"/>
+
+            <RowDefinition Height="1*"/>
+
+        </Grid.RowDefinitions>
+        <Button x:Name="Fetch_Btn" Grid.Row="0" Grid.Column="0" Margin="525,310,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="BTN_Fetch_Click" Content="Fetch" Foreground="Black" FontSize="30" AutomationProperties.HelpText="Press it when the URL is in the textfield" Background="#FF63A9B0" FontFamily="Consolas" BorderBrush="#FF3A3030" BorderThickness="3,3,3,3" RequestedTheme="Light" Padding="3,4,8,5"/>
+        <TextBox  FontFamily="Consolas" x:Name="URL_GET_Text"  HorizontalAlignment="Left" Margin="80,0,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Center" Width="560" Height="Auto" Grid.Column="0" TextChanged="URL_GET_CHANGED" RequestedTheme="Light" BorderThickness="3,3,3,3" PlaceholderText="Enter an URL you want to GET" InputScope="Url" AllowDrop="True"/>
+        <Rectangle Fill="LightGray" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="1070" Margin="945,0,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="25" FocusVisualPrimaryBrush="#FFA87676"  />
+        <TextBox TextAlignment="Center" HorizontalTextAlignment="Center" HorizontalAlignment="Left" Margin="190,20,0,0" Text="GET METHOD"   FontFamily="Consolas" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="70" IsReadOnly="True" Foreground="#FF292727" BorderBrush="#66000000" Background="Azure" BorderThickness="0,0,0,0" FocusVisualPrimaryBrush="#FF020202" FontSize="40"/>
+        <TextBox  FontFamily="Consolas" x:Name="GET_RESULT_TEXT" IsReadOnly="True" Grid.Column="0" AcceptsReturn="True" HorizontalAlignment="Left" Margin="63,10,0,0" Grid.Row="1" Text="The result of the get method will appear here " TextWrapping="Wrap" VerticalAlignment="Top" Height="470" Width="757"/>
+        <TextBox TextAlignment="Center" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Text="POST METHOD"   FontFamily="Consolas" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="55" IsReadOnly="True" Foreground="#FF292727" BorderBrush="#66000000" Background="Azure" BorderThickness="0,0,0,0" FocusVisualPrimaryBrush="#FF020202" FontSize="40" Grid.Column="1"/>
+        <TextBox  AcceptsReturn="True" FontFamily="Consolas" x:Name="Message_POST_Text"  HorizontalAlignment="Left" Margin="75,140,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="725" Height="205" Grid.Row="0" Grid.Column="1" TextChanged="String_POST_CHANGED" RequestedTheme="Light" BorderThickness="3,3,3,3" PlaceholderText="Enter the message, for example: {&quot;Value1&quot;: &quot;Hello&quot;} " InputScope="Text" AllowDrop="True"/>
+        <Button x:Name="Post_Btn" Grid.Row="0" Grid.Column="1" Margin="685,355,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="BTN_POST_Click" Content="Post" Foreground="Black" FontSize="30" AutomationProperties.HelpText="Press it when the URL is in the textfield" Background="#FF63A9B0" FontFamily="Consolas" BorderBrush="#FF3A3030" BorderThickness="3,3,3,3" RequestedTheme="Light" Padding="3,4,8,5"/>
+        <TextBox  FontFamily="Consolas" x:Name="URL_POST_Text"  HorizontalAlignment="Left" Margin="75,365,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="555" Height="Auto" TextChanged="URL_POST_CHANGED" RequestedTheme="Light" BorderThickness="3,3,3,3" PlaceholderText="Enter an URL you want to POST" InputScope="Url" AllowDrop="True" Grid.Column="1" Grid.Row="0" />
+        <TextBox  FontFamily="Consolas" x:Name="POST_RESPONSE_TEXT" IsReadOnly="True"  Grid.Column="1" AcceptsReturn="True" HorizontalAlignment="Left" Margin="75,10,0,0" Grid.Row="1" Text="The response of the server will appear here " TextWrapping="Wrap" VerticalAlignment="Top" Height="470" Width="757"/>
+        <Button x:Name="Clear_Button" Grid.Row="0" Grid.Column="0" Margin="525,410,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="BTN_Clear_Click" Content="Clear" Foreground="Black" FontSize="30" AutomationProperties.HelpText="Press it when the URL is in the textfield" Background="#FF63A9B0" FontFamily="Consolas" BorderBrush="#FF3A3030" BorderThickness="3,3,3,3" RequestedTheme="Light" Padding="3,4,8,5"/>
+
+
+
+
+
+
+
+    </Grid>
+</Page>
