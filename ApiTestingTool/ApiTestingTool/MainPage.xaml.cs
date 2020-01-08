@@ -74,7 +74,7 @@ namespace ApiTestingTool
         }
 
         //click Post_Button
-        private void BTN_POST_Click(object sender, RoutedEventArgs e)
+        private async void BTN_POST_Click(object sender, RoutedEventArgs e)
         {
             //security if the user input is empty
             if (URL_POST_Text.Text == String.Empty)
@@ -82,7 +82,8 @@ namespace ApiTestingTool
                 debug("Please enter an URL");
                 return;
             }
-            POST_RESPONSE_TEXT.Text = Post.PostTheJson();
+            string s = await Post.PostTheJson();
+            POST_RESPONSE_TEXT.Text =s ;
 
         }
 
