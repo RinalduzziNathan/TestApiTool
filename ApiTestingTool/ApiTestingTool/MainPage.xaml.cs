@@ -26,8 +26,7 @@ namespace ApiTestingTool
         public MainPage()
         {
             this.InitializeComponent();
-            string json = "{\"string\":\"Gehenne\"}";
-            Post = new PostJson("null",json);
+            Post = new PostJson("null","oof");
             //Post.PostTheJson();
             Get = new GetJson("null");
 
@@ -44,8 +43,8 @@ namespace ApiTestingTool
             await dialog.ShowAsync();
         }
 
-        //click on Fetch_Button
-        private void BTN_Fetch_Click(object sender, RoutedEventArgs e)
+        //click on Fetch_Button, async because it can take some time if you have bad connection so it doesn't block the thread
+        private async void BTN_Fetch_Click(object sender, RoutedEventArgs e)
         {
             //security if the user input is empty
             if (URL_GET_Text.Text == string.Empty)
@@ -53,7 +52,8 @@ namespace ApiTestingTool
                 debug("Please enter an URL");
                 return;
             }
-            GET_RESULT_TEXT.Text = Get.FetchTheUrl();
+            string ResulMessage = await Get.FetchTheUrl();
+            GET_RESULT_TEXT.Text = ResulMessage;
         }
 
         //When user enter something on the textfield
@@ -74,7 +74,7 @@ namespace ApiTestingTool
         }
 
         //click Post_Button
-        private void BTN_POST_Click(object sender, RoutedEventArgs e)
+        private async void BTN_POST_Click(object sender, RoutedEventArgs e)
         {
             //security if the user input is empty
             if (URL_POST_Text.Text == String.Empty)
@@ -82,7 +82,8 @@ namespace ApiTestingTool
                 debug("Please enter an URL");
                 return;
             }
-            POST_RESPONSE_TEXT.Text = Post.PostTheJson();
+            string s = await Post.PostTheJson();
+            POST_RESPONSE_TEXT.Text =s ;
 
         }
 

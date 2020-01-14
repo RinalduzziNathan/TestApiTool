@@ -13,29 +13,38 @@ namespace ApiTestingTool
     {
         public string _url { get; set; }
         public string _json { get; set; }
+        private bool _error;//track if the try/catch threw an error
 
-        public PostJson(string url,string json)
+        public PostJson(string url, string json)
         {
+            _error = false;
             _url = url;
             _json = json;
         }
 
-        public string PostTheJson()
+        public async Task<string> PostTheJson()
         {
-            try
+            //Lambda anonymous async
+            string ResponseOfTheServer = await Task.Run( () =>
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
-                request.ContentType = "application/json";
-                request.Method = "POST";
-
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                try
                 {
-              
-                    streamWriter.Write(_json);
-                }
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
+                    request.ContentType = "application/json";
+                    request.Method = "POST";
 
-                var httpResponse = (HttpWebResponse)request.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        streamWriter.Write(_json);
+                    }
+                    var httpResponse = (HttpWebResponse)request.GetResponse();
+                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    {
+                        var result = streamReader.ReadToEnd();
+                        return ("Result of the json posted : "+result +" Status : "+ httpResponse.StatusDescription.ToString());
+                    }
+                }
+                catch (System.Exception Error)//if crash => return the error message 
                 {
                     string result = streamReader.ReadToEnd();
                     MainPage.debug(httpResponse.StatusDescription.ToString());
@@ -54,10 +63,10 @@ namespace ApiTestingTool
             }   
             catch (System.Exception Error)
             {
-                MainPage.debug(Error.Message);
-                return Error.Message;
+                MainPage.debug("Error ! "+ResponseOfTheServer);
             }
-            
+            return ResponseOfTheServer;
         }
+      
     }
 }
