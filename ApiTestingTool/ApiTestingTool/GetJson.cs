@@ -20,7 +20,6 @@ namespace ApiTestingTool
         {
             try
             {
-
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
                 request.Method = "GET";
 

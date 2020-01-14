@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,11 +37,21 @@ namespace ApiTestingTool
                 var httpResponse = (HttpWebResponse)request.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    var result = streamReader.ReadToEnd();
-                    return httpResponse.StatusDescription.ToString();
+                    string result = streamReader.ReadToEnd();
+                    MainPage.debug(httpResponse.StatusDescription.ToString());
+                    //try to parse the sting in json, if it works return the json
+                    try
+                    {
+                        JObject json = JObject.Parse(result);
+                        return json.ToString();
+                    }
+                    catch//if the parse crash, juste return the string
+                    {
+                        return result;
+                    }
                 }
                 
-            }
+            }   
             catch (System.Exception Error)
             {
                 MainPage.debug(Error.Message);
