@@ -25,7 +25,7 @@ namespace ApiTestingTool
         public async Task<string> PostTheJson()
         {
             //Lambda anonymous async
-            string ResponseOfTheServer = await Task.Run( () =>
+            string ResponseOfTheServer = await Task.Run(() =>
             {
                 try
                 {
@@ -41,32 +41,31 @@ namespace ApiTestingTool
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
                         var result = streamReader.ReadToEnd();
-                        return ("Result of the json posted : "+result +" Status : "+ httpResponse.StatusDescription.ToString());
+                        try
+                        {
+                            JObject json = JObject.Parse(result);//parse the string in json for better visual output
+                            return json.ToString();
+                        }
+                        catch
+                        {
+                            return result;
+                            
+                        }
                     }
                 }
                 catch (System.Exception Error)//if crash => return the error message 
                 {
-                    string result = streamReader.ReadToEnd();
-                    MainPage.debug(httpResponse.StatusDescription.ToString());
-                    //try to parse the sting in json, if it works return the json
-                    try
-                    {
-                        JObject json = JObject.Parse(result);
-                        return json.ToString();
-                    }
-                    catch//if the parse crash, juste return the string
-                    {
-                        return result;
-                    }
+                    _error = true;
+                    return Error.Message;
                 }
-                
-            }   
-            catch (System.Exception Error)
+            });
+            if (_error)
             {
-                MainPage.debug("Error ! "+ResponseOfTheServer);
+                MainPage.debug("Error ! " + ResponseOfTheServer);
             }
             return ResponseOfTheServer;
         }
-      
+
+
     }
 }
